@@ -1,18 +1,17 @@
 function [mu,X,ncg,iter,varargout] = ...
     LanFRO(OpC,Mfun,v,checkcvg,nev,maxit)
-% [mu,X,ncvg,iter,varargout]=LanFRO(OpC,Mfun,findCvg,checkcvg,v,nev,maxit)
-% The function LanFRO implements the Lanczos method on C with M-inner
-% product. Full re-orthogonalization is used. 
+% [mu,X,ncvg,iter,varargout]=LanFRO(OpC,Mfun,findCvg,v,checkcvg,nev,maxit)
+% The function LanFRO returns the eigenpairs of the ordinary eigenproblem
+%     C*x = mu*x,
+% where the matrix C is symmetric respect to the M-inner product.
 %
 % Inputs:
 %  * OpC (function_handle) - matrix-vector product u=Cv.
 %  * Mfun (function_handle) - matrix-vector product u=Mv. 
-%    The matrix M is positive definite. The matrix C 
-%    is symmetric with respect to the the M-inner product.
 %  * v (class numeric) - starting vector.
-%  * checkcvg (function_handle) - checkcvg(mu,res) identifies 
-%    the converged eigenpairs. A mask is returned and mu(mask) 
-%    and S(:,mask) are the converged eigenpairs.
+%  * checkcvg (function_handle) - checkcvg(mu,res) returns a mask 
+%    identifying the converged eigenpairs. mu(mask) are the converged 
+%    eigenvalues and S(:,mask) are the associated eigenvectors.
 %  * nev (class numeric) - number of desired eigenpairs.
 %  * maxit (class numeric) - maximal number of iterations.
 %
@@ -50,11 +49,11 @@ for j = 1 : maxit
     r = r - alph*vc;
     p = Mfun(r);
     
-    %----- Perform full reorthogonalization -----%
+    %----- We perform full reorthogonalization -----%
     h = V'*p;
     r = r - V*h;
+    %-----------------------------------------------%
     p = Mfun(r);
-    
     a(j) = alph;  % update the diagonal of T_j
     if j > 1
         b(j-1) = beta;  % update the superdiagonal of T_j

@@ -1,18 +1,15 @@
 function [np,nm] = inertiaOfD(D)
 %
 % This function counts the inertia of the symmetric, block diagonal D.
-% The matrix D is assumed to be non-singular and the dimension of 
-% each block is 1 or 2.
+% The dimension of each block is 1 or 2.
 %
-% Input:
+% Inputs:
 %   D: the n-by-n symmetric, block diagonal matrix.
 %
-% Output:
+% Outputs:
 %   np: the number of positive eigenvalues of D.
 %   nm: the number of negative eigenvalues of D.
 %
-% Comment:
-%   
 
 n  = size(D,2);
 np = 0;

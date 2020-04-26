@@ -1,5 +1,5 @@
 %
-% Script files: checkZ.m
+% Script file: checkZ.m
 %
 % We check the accuracy of the basis Z = [ZN ZC] 
 % and the dimension of the common nullspace.

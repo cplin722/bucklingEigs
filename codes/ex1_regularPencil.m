@@ -1,7 +1,19 @@
 %
 % Script file: ex1_regularPencil.m
 %
-% This is a demo script for example1.
+% This is a demo script for example1. We consider a synthetic buckling 
+% eigenvalue problem 
+%     K = lam*KG, 
+% where K is positive semi-definite, KG is indefinite, and K-lam*KG is 
+% regular. We demonstrate the rapid growth of the Lanczos vectors v_j 
+% studied by Meerbergen and Stewart. We show the boundedness of the norm
+% ||v_j||_2 through the regularization of the inner product.
+%
+% We will plot the following:
+%   1. the angles between the Lanczos vectors v_j and the nullspace N(K); 
+%   2. the growth of the nullspace components of the Lanczos vectors v_j;
+%   3. the growth of the Lanczos vectors v_j;
+%   4. the accuracy of the computed eigenpairs.
 %
 
 clear all
@@ -17,7 +29,7 @@ maxit = 40;
 % construct the matrices K and KG
 rng(123,'twister');
 lam = [(1:n-m)'; zeros(m,1)];
-phi = [(-1).^(1:n)'];
+phi = (-1).^(1:n)';
 
 Lam = diag( lam );
 Phi = diag( phi );
@@ -91,12 +103,12 @@ ncM   = sqrt( sum((Z'*V).*(Z'*V),1) );
 nrmvM = sqrt( sum(V.*V) );
 cosM  = ncM./nrmvM;
 
-fprintf('%d\t%+.10f\t%.2e\n', ...
-        [(1:length(lamM)); lamM'; backErrM';]);
+%fprintf('%d\t%+.10f\t%.2e\n', ...
+%        [(1:length(lamM)); lamM'; backErrM';]);
 
 %
 %--------------- Plot the results ---------------%
-%---------- plot the angle between the Lanczos vectors and N(K)----------%
+%---------- plot the angles between the Lanczos vectors and N(K) ----------%
 figure(1);
 h1 = semilogy(1:length(ncK),cosK,'rx','MarkerSize',10,'linewidth',2);  hold on;  
 h2 = semilogy(1:length(ncM),cosM,'b+','MarkerSize',10,'linewidth',2);  
@@ -113,7 +125,7 @@ legend([h1(1),h2(1)], ...
        'M-inner product', ...
        'Location','northeast','FontSize',16);
    
-%---------- plot the growth of the nullspace component----------%
+%---------- plot the growth of the nullspace components ----------%
 figure(2);
 h1 = semilogy(1:length(ncK),ncK,'rx','MarkerSize',10,'linewidth',2);  hold on;  
 h2 = semilogy(1:length(ncM),ncM,'b+','MarkerSize',10,'linewidth',2);  
@@ -130,7 +142,7 @@ legend([h1(1),h2(1)], ...
        'M-inner product', ...
        'Location','northeast','FontSize',16);
    
-%---------- plot the growth of the Lanczos vector----------%
+%---------- plot the growth of the Lanczos vectors ----------%
 figure(3);
 h1 = semilogy(1:length(ncK),nrmvK,'rx','MarkerSize',10,'linewidth',2);  hold on;  
 h2 = semilogy(1:length(ncM),nrmvM,'b+','MarkerSize',10,'linewidth',2); 
@@ -147,7 +159,7 @@ legend([h1(1),h2(1)], ...
        'M-inner product', ...
        'Location','northeast','FontSize',16);
    
-%---------- plot the relative residual norms ----------%
+%---------- accuracy of the computed eigenpairs ----------%
 figure(4);
 h1 = semilogy(lamK,backErrK,'rx','MarkerSize',10,'linewidth',2);  hold on;
 h2 = semilogy(lamM,backErrM,'b+','MarkerSize',10,'linewidth',2);
@@ -158,7 +170,9 @@ xlim([-21 21]); ylim([2e-17 10])
 xlabel('eigenvalue'); 
 ylabel('relative residual norm');
 set(gca,'ytick',[1e-16 1e-12 1e-8 1e-4 1]);
-legend([h1(1),h2(1)],'K-inner product','M-inner product', ...
+legend([h1(1),h2(1)], ...
+       'K-inner product', ...
+       'M-inner product', ...
        'Location','northeast','FontSize',16);
 
 
