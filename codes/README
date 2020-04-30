@@ -3,11 +3,7 @@ bucklingEigs README file
 ========================
 
 ---------------------------------
-Test run of the synthetic example
+Test runs of the synthetic example
 ---------------------------------
 * run "ex1_regularPencil"
-
------------------------------------
-Test runs of the industrial example
------------------------------------
-* run "ex2_singularPencil"
+* run "ex2_synthetic_method1" or "ex2_synthetic_method2"
