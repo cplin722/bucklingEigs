@@ -1,9 +1,13 @@
 ========================
 bucklingEigs README file
 ========================
+* LanFRO.m - an implementation of the Lanczos method.
+* inertiaOfD.m - function computing the inertia of the block diagonal matrix.
+* OpC1.m - function computing the matrix-vector product u=Cv.
+* OpC2.m - function computing the matrix-vector product u=Cv.
 
 ----------------------------------
 Test runs of the synthetic example
 ----------------------------------
-* run "ex1_regularPencil"
-* run "ex2_synthetic_method1" or "ex2_synthetic_method2"
+* run "ex1_regularPencil.m"
+* run "ex2_synthetic_method1.m" or "ex2_synthetic_method2.m"
