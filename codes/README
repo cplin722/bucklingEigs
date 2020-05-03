@@ -2,12 +2,12 @@
 bucklingEigs README file
 ========================
 
-----------------------------------
-Test runs of the synthetic example
-----------------------------------
+----------------------------------------------------
+Demonstration of the growth of Lanczos vectors
+----------------------------------------------------
+* run "ex1_regularPencil.m"
 
 ----------------------------------
-Test runs of the synthetic example
+Test run of the synthetic example
 ----------------------------------
-* ex1_regularPencil.m demonstrate the 
 * run "ex2_synthetic.m"
